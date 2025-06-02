@@ -2,6 +2,7 @@ package com.estudandospring.aula.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.estudandospring.aula.dto.UserDTO;
 import com.estudandospring.aula.entities.User;
@@ -13,6 +14,7 @@ public class UserService {
 	@Autowired
 	private UserRepository repository;
 	
+	@Transactional(readOnly = true) //Transacao atomica, fechar a transacao depois q executar
 	public UserDTO findById(Long id) {
 	 User entity =	repository.findById(id).get();
 	 UserDTO dto = new UserDTO(entity); /*objeto entity é o retorno da busca do repository, Q vem com todos campos da tabela.
